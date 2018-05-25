@@ -26,5 +26,14 @@ namespace Roadhackers_finalproject
         {
             this.InitializeComponent();
         }
+
+        private void update_Click(object sender, RoutedEventArgs e)
+        {
+            float distance = Convert.ToSingle(dist.Text);
+            float velocity = Convert.ToSingle(veloc.Value);
+            float sol = distance / velocity * 60;
+            res.Text = String.Format("Het zal {0} minuten duren.", sol.ToString("0.0"));
+
+        }
     }
 }
