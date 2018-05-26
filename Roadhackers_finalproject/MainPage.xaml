@@ -9,10 +9,14 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <TextBlock Name="ResultTextBlock" HorizontalAlignment="Left" Height="82" Margin="148,0,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="186"/>
+        <Image Name="ResultImage" Width="100" Height="100" Margin="32,0,0,0" RenderTransformOrigin="0.468,2.423" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <Button Content="Get Weather" Click="Button_Click" HorizontalAlignment="Left" Margin="36,385,0,0" VerticalAlignment="Top" Width="113" />
         <TextBox x:Name="dist" HorizontalAlignment="Left" Margin="36,465,0,0" Text="" VerticalAlignment="Top"/>
         <Slider x:Name="veloc" HorizontalAlignment="Left" Margin="36,516,0,0" VerticalAlignment="Top" Width="192" Maximum="20" Minimum="4"/>
         <TextBox HorizontalAlignment="Left" Margin="249,522,0,0" Text="{Binding ElementName=veloc,Path=Value}" VerticalAlignment="Top"/>
         <Button x:Name="update" Content="Update" HorizontalAlignment="Left" Margin="36,584,0,0" VerticalAlignment="Top" Click="update_Click"/>
         <TextBlock x:Name="res" HorizontalAlignment="Left" Margin="132,584,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="192" Height="33"/>
+
     </Grid>
 </Page>

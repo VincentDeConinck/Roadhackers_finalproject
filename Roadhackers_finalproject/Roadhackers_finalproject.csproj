@@ -99,6 +99,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WeatherData.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -107,6 +108,24 @@
     <None Include="Roadhackers_finalproject_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Weather\01d.png" />
+    <Content Include="Assets\Weather\01n.png" />
+    <Content Include="Assets\Weather\02d.png" />
+    <Content Include="Assets\Weather\02n.png" />
+    <Content Include="Assets\Weather\03d.png" />
+    <Content Include="Assets\Weather\03n.png" />
+    <Content Include="Assets\Weather\04d.png" />
+    <Content Include="Assets\Weather\04n.png" />
+    <Content Include="Assets\Weather\09d.png" />
+    <Content Include="Assets\Weather\09n.png" />
+    <Content Include="Assets\Weather\10d.png" />
+    <Content Include="Assets\Weather\10n.png" />
+    <Content Include="Assets\Weather\11d.png" />
+    <Content Include="Assets\Weather\11n.png" />
+    <Content Include="Assets\Weather\13d.png" />
+    <Content Include="Assets\Weather\13n.png" />
+    <Content Include="Assets\Weather\50d.png" />
+    <Content Include="Assets\Weather\50n.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -127,8 +146,20 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client">
+      <Version>5.2.6</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Net.Http">
+      <Version>2.2.29</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="System.Net.Http">
+      <Version>4.3.3</Version>
     </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
