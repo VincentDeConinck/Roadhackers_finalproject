@@ -40,11 +40,18 @@ namespace Roadhackers_finalproject
 
         private void update_Click(object sender, RoutedEventArgs e) // this is Lennerts code
         {
-            float distance = Convert.ToSingle(dist.Text); // Lennert you will need to throw an exception here, so that when the user does not enter anything the programm does not stop debugging. 
-            float velocity = Convert.ToSingle(veloc.Value);
-            float sol = distance / velocity * 60;
-            res.Text = String.Format("Het zal {0} minuten duren.", sol.ToString("0.0"));
-
+            try
+            {
+                float distance = Convert.ToSingle(dist.Text);
+                float velocity = Convert.ToSingle(veloc.Value);
+                float sol = distance / velocity * 60;
+                res.Text = String.Format("Het zal {0} minuten duren.", sol.ToString("0.0"));
+            }
+            catch (FormatException)
+            {
+                res.Text = String.Format("Vul aub in hoe lang uw fietsroute is.");
+            }
         }
+
     }
 }
