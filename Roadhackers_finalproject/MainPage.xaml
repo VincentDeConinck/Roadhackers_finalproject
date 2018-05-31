@@ -24,7 +24,7 @@
         <Button x:Name="update" Content="Update" HorizontalAlignment="Left" Margin="36,584,0,0" VerticalAlignment="Top" Click="update_Click"/>
         <TextBlock x:Name="res" HorizontalAlignment="Left" Margin="132,584,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="33"/>
         <Button x:Name="traffic" Click="Traffic_Click" HorizontalAlignment="Left" Margin="36,485,0,0" VerticalAlignment="Top" Width="113"/>
-        <TextBlock x:Name="txtTraffic" Text="" TextWrapping="Wrap"/>
+        <TextBlock x:Name="txtTraffic" HorizontalAlignment="Left" Margin="162,434,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Height="99"/>
 
     </Grid>
 </Page>
