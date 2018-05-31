@@ -77,11 +77,11 @@ namespace Roadhackers_finalproject
 
             if (txtBlockLiveboardResult.Text.Contains("0") == true)
             {
-                Console.WriteLine("Op dit moment zijn er geen vertragingen");
+                res.Text = String.Format("Op dit moment zijn er geen vertragingen");
             }
             else
             {
-                Console.WriteLine("Opgelet! Er zijn vertragingen opgelopen");
+                res.Text = String.Format("Opgelet! Er zijn vertragingen opgelopen");
             }
         }
 
