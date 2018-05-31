@@ -16,6 +16,10 @@ using Windows.UI.Xaml.Navigation;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Windows;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
+using System.Threading.Tasks;
+using Windows.Data.Xml.Dom;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace Roadhackers_finalproject
@@ -83,6 +87,32 @@ namespace Roadhackers_finalproject
             {
                 Console.WriteLine("Opgelet! Er zijn vertragingen opgelopen");
             }
+        }
+
+        private void Traffic_Click(object sender, RoutedEventArgs e) //Andres' code
+        {
+            // Load the RSS file from the RSS URL
+            XmlDocument.LoadFromUriAsync(new Uri("http://www.verkeerscentrum.be/rss/1-LOS.xml"))
+                .Completed = XmlLoadedAsync;
+        }
+
+        private async Task UpdateTextBox(string data) //still Andres' code
+        {
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => txtTraffic.Text = data);
+        }
+
+        private async void XmlLoadedAsync(IAsyncOperation<XmlDocument> asyncInfo, AsyncStatus asyncStatus) //Andres' code
+        {
+            var rssXDoc = asyncInfo.GetResults();
+
+            // Parse the Items in the RSS file
+            var rssNodes = rssXDoc.SelectNodes("rss/channel/item");
+
+            var rssSubNode = rssNodes.First().SelectSingleNode("title");
+            var title = rssSubNode != null ? rssSubNode.InnerText : "";
+
+            // Return the string that contain the RSS items
+            await UpdateTextBox(title);
         }
 
     }
