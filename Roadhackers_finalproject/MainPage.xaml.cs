@@ -89,30 +89,32 @@ namespace Roadhackers_finalproject
             }
         }
 
-        private void Traffic_Click(object sender, RoutedEventArgs e) //Andres' code
+        private void Traffic_Click(object sender, RoutedEventArgs e) //Andres' code, Traffic_Click is my button click
         {
             // Load the RSS file from the RSS URL
             XmlDocument.LoadFromUriAsync(new Uri("http://www.verkeerscentrum.be/rss/1-LOS.xml"))
                 .Completed = XmlLoadedAsync;
         }
 
-        private async Task UpdateTextBox(string data) //still Andres' code
+        private async Task UpdateTextBlock(string data) //Andres' code
         {
+            //txtTraffic is my textblock
             await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => txtTraffic.Text = data);
         }
 
-        private async void XmlLoadedAsync(IAsyncOperation<XmlDocument> asyncInfo, AsyncStatus asyncStatus) //Andres' code
+        private async void XmlLoadedAsync(IAsyncOperation<XmlDocument> asyncInfo, AsyncStatus asyncStatus) //still Andres' code
         {
             var rssXDoc = asyncInfo.GetResults();
 
             // Parse the Items in the RSS file
             var rssNodes = rssXDoc.SelectNodes("rss/channel/item");
 
+            //select the right nodes, I only need "title"
             var rssSubNode = rssNodes.First().SelectSingleNode("title");
             var title = rssSubNode != null ? rssSubNode.InnerText : "";
 
             // Return the string that contain the RSS items
-            await UpdateTextBox(title);
+            await UpdateTextBlock(title);
         }
 
     }
