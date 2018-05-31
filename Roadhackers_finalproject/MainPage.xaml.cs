@@ -13,7 +13,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Windows;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace Roadhackers_finalproject
@@ -53,5 +55,36 @@ namespace Roadhackers_finalproject
             }
         }
 
+        /// string url = Link Json API irail -> new http client 
+        /// Output in Textblock -> Liveboard results in minutes
+
+        async void getLiveboardStation()
+        {
+            string url = "https://api.irail.be/liveboard/?station=Antwerpen-Centraal&format=json&arrdep=ARR";
+            HttpClient client = new HttpClient();
+
+            string LiveboardStation = await client.GetStringAsync(url);
+            var data = JsonConvert.DeserializeObject<RootObjectStation>(LiveboardStation);
+
+            txtBlockLiveboardResult.Text = data.arrivals.arrival[9].delay.ToString() + " Minuten";
+
+
+        }
+
+        private void Liveboard_Click(object sender, RoutedEventArgs e)
+        {
+            string str = txtBlockLiveboardResult.Text;
+
+            if (txtBlockLiveboardResult.Text.Contains("0") == true)
+            {
+                Console.WriteLine("Op dit moment zijn er geen vertragingen");
+            }
+            else
+            {
+                Console.WriteLine("Opgelet! Er zijn vertragingen opgelopen");
+            }
+        }
+
     }
 }
+
