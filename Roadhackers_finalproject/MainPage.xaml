@@ -13,8 +13,8 @@
         <Grid>
 
         <TextBlock x:Name="txtBlockLiveboardResult" HorizontalAlignment="Left" Height="23" Margin="176,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Text="&quot;&quot;"/>
-        <TextBox x:Name="Treinverkeer" HorizontalAlignment="Left" Height="34" Margin="36,154,0,0" TextWrapping="Wrap" Text="Treinverkeer in Antwerpen" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="60,255,0,0" VerticalAlignment="Top" Width="75" Click="Liveboard_Click"/>
+        <TextBlock x:Name="Treinverkeer" HorizontalAlignment="Left" Height="34" Margin="36,154,0,0" TextWrapping="Wrap" Text="Treinverkeer in Antwerpen" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="vertraging" Content="Button" HorizontalAlignment="Left" Margin="60,255,0,0" VerticalAlignment="Top" Width="75" Click="Liveboard_Click"/>
         <TextBlock Name="ResultTextBlock" HorizontalAlignment="Left" Height="82" Margin="148,0,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="186"/>
         <Image Name="ResultImage" Width="100" Height="100" Margin="32,0,0,0" RenderTransformOrigin="0.468,2.423" HorizontalAlignment="Left" VerticalAlignment="Center" />
         <Button Content="Get Weather" Click="Button_Click" HorizontalAlignment="Left" Margin="36,385,0,0" VerticalAlignment="Top" Width="113" />

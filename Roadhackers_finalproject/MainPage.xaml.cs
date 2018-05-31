@@ -59,6 +59,7 @@ namespace Roadhackers_finalproject
             }
         }
 
+        /// Vincent's Code !! 
         /// string url = Link Json API irail -> new http client 
         /// Output in Textblock -> Liveboard results in minutes
 
@@ -70,23 +71,22 @@ namespace Roadhackers_finalproject
             string LiveboardStation = await client.GetStringAsync(url);
             var data = JsonConvert.DeserializeObject<RootObjectStation>(LiveboardStation);
 
-            txtBlockLiveboardResult.Text = data.arrivals.arrival[9].delay.ToString() + " Minuten";
+            
+            string vertraging =  data.arrivals.arrival[9].delay;
 
-
+            if(vertraging.Contains("0") == true)
+            {
+                txtBlockLiveboardResult.Text ="Op dit moment zijn er geen vertragingen";
+            }
+            else
+            {
+                txtBlockLiveboardResult.Text = "Opgelet ! Op dit moment zijn er" + vertraging + "minuten vertragingen";
+            }
         }
 
         private void Liveboard_Click(object sender, RoutedEventArgs e)
         {
-            string str = txtBlockLiveboardResult.Text;
-
-            if (txtBlockLiveboardResult.Text.Contains("0") == true)
-            {
-                res.Text = String.Format("Op dit moment zijn er geen vertragingen");
-            }
-            else
-            {
-                res.Text = String.Format("Opgelet! Er zijn vertragingen opgelopen");
-            }
+            getLiveboardStation();
         }
 
         private void Traffic_Click(object sender, RoutedEventArgs e) //Andres' code, Traffic_Click is my button click
