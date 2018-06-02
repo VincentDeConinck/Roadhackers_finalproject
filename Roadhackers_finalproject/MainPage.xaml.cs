@@ -1,25 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using Newtonsoft.Json;
+using System;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
+using Windows.Data.Xml.Dom;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System.Windows;
-using Windows.ApplicationModel.Core;
-using Windows.UI.Core;
-using System.Threading.Tasks;
-using Windows.Data.Xml.Dom;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace Roadhackers_finalproject
@@ -32,10 +22,15 @@ namespace Roadhackers_finalproject
         public MainPage()
         {
             this.InitializeComponent();
+            Traffic_Load();
+            getLiveboardStation();
+            GetWeather();
+      
+
         }
 
 
-        private async void Button_Click(object sender, RoutedEventArgs e) // Sandra: this is my code... don't you dare touche it...
+        private async void GetWeather() // Sandra: this is my code... don't you dare touche it...
         {     
              RootObject myWeather =
                 await WeatherData.GetWeather(); // 
@@ -77,44 +72,115 @@ namespace Roadhackers_finalproject
             if(vertraging.Contains("0") == true)
             {
                 txtBlockLiveboardResult.Text ="Op dit moment zijn er geen vertragingen";
+
+                //  Sandra: trying to give GUI a personal touch
+                string image = "0";
+                string smile = String.Format("ms-appx:///Assets/Smiley/{0}.png", image);// accessing my own pics (roayalty free)
+                Smiley.Source = new BitmapImage(new Uri(smile, UriKind.Absolute));
+
+
             }
             else
             {
                 txtBlockLiveboardResult.Text = "Opgelet ! Op dit moment zijn er" + vertraging + "minuten vertragingen";
+
+                //  Sandra: trying to give GUI a personal touch
+                string image = "1";
+                string smile = String.Format("ms-appx:///Assets/Smiley/{0}.png", image);// accessing my own pics (roayalty free)
+                Smiley.Source = new BitmapImage(new Uri(smile, UriKind.Absolute));
+
             }
         }
 
-        private void Liveboard_Click(object sender, RoutedEventArgs e)
-        {
-            getLiveboardStation();
-        }
 
-        private void Traffic_Click(object sender, RoutedEventArgs e) //Andres' code, Traffic_Click is my button click
+        //Sandra: THIS IS THE FEED I WANT TO SHOW THE TREND WITH AN ARROW UP OR DOWN OR LEVEL, 
+
+        //Sandra: in order to that, I had to change Andres code a bit (which was perfectly working and a very cleverly written code) 
+
+
+       public void Traffic_Load() //Andres' code, Traffic_Click is my button click
         {
-            // Load the RSS file from the RSS URL
+            // Andres: Load the RSS file from the RSS URL
             XmlDocument.LoadFromUriAsync(new Uri("http://www.verkeerscentrum.be/rss/1-LOS.xml"))
                 .Completed = XmlLoadedAsync;
         }
 
-        private async Task UpdateTextBlock(string data) //Andres' code
+        public async Task UpdateTrafficInfo(string data, int trend) //Andres' code 
         {
-            //txtTraffic is my textblock
-            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => txtTraffic.Text = data);
+            //SANDRA: old code from Andres which caused troubles when trying to add my arrow codemj:
+            //await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => txtTraffic.Text = data);
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+            () => 
+            {
+               
+
+                // Andres: txtTraffic is my textblock
+                txtTraffic.Text = data;  
+                
+                // Sandra: Tadaaaaa, here is my arrow code
+
+                //Sandra: show trend as arrows
+                switch (trend)
+                {
+                    case 2:
+                        FileTrend.Source = new BitmapImage(new Uri("ms-appx:///Assets/Arrow/arrow_up.png", UriKind.Absolute));
+                    break;
+                    case 1:
+                        FileTrend.Source = new BitmapImage(new Uri("ms-appx:///Assets/Arrow/arrow_right.png", UriKind.Absolute));
+                    break;
+                    case 0:
+                        FileTrend.Source = new BitmapImage(new Uri("ms-appx:///Assets/Arrow/arrow_down.png", UriKind.Absolute));
+                    break;
+                    default:
+                        FileTrend.Visibility = 0; // Sandra... out of nothing comes nothing... 
+                    break;
+                }
+                               });
+
         }
 
-        private async void XmlLoadedAsync(IAsyncOperation<XmlDocument> asyncInfo, AsyncStatus asyncStatus) //still Andres' code
+       public async void XmlLoadedAsync(IAsyncOperation<XmlDocument> asyncInfo, AsyncStatus asyncStatus) //still Andres' code
         {
             var rssXDoc = asyncInfo.GetResults();
 
-            // Parse the Items in the RSS file
+            //Andres: Parse the Items in the RSS file
             var rssNodes = rssXDoc.SelectNodes("rss/channel/item");
-
-            //select the right nodes, I only need "title"
+            
+            //Sandra: This is new... read out data
+            for (int i = 0; i < rssNodes.Length; i++)
+            {
+                var rssSubNode1 = rssNodes[i].SelectSingleNode("title");
+                System.Diagnostics.Debug.WriteLine(rssSubNode1.InnerText);
+            }
+            //Andres: select the right nodes, I only need "title"
             var rssSubNode = rssNodes.First().SelectSingleNode("title");
             var title = rssSubNode != null ? rssSubNode.InnerText : "";
 
+            int trend = GetTrafficTrend(title);  // Sandra: Add trend number derrived out of parsed text in order to be displayed with the text box in Update traffic method 
+
+
             // Return the string that contain the RSS items
-            await UpdateTextBlock(title);
+            await UpdateTrafficInfo(title, trend); // Sandra: adding trend to it 
+            
+
+
+         }
+
+        //SANDRA:
+        /// <summary>
+        /// Find trends in text
+        /// </summary>
+        /// <param name="textToParse"></param>
+        /// <returns>2 = stijgend; 1 = stabiel; 0 = dalend; -1 not defined</returns>
+        private int GetTrafficTrend(string textToParse)
+        {
+            if (textToParse.ToLower().Contains("stijgend"))
+                return 2;
+            if (textToParse.ToLower().Contains("stabiel"))
+                return 1;
+            if (textToParse.ToLower().Contains("dalend"))
+                return 0;
+            return -1;
         }
 
     }

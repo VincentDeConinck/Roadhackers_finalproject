@@ -7,24 +7,72 @@
      xmlns:local="using:Roadhackers_finalproject"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
-        <Grid>
+    <StackPanel Margin="10,0,0,0" HorizontalAlignment="Left">
+        <Grid Margin="10,0,0,20" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" /><!--Row no 0-->
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" /> <!--Column no 0-->
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />  <!--Column takes what is left over of the space-->
+              
+            </Grid.ColumnDefinitions>
+            
+            
+            <!--This is the title-->
+            <TextBlock Text="Onderweg in Antwerpen" FontSize="24" Grid.ColumnSpan="3" Margin="0,20,0,0" />
+            
+            <!--here starts FILE-->
+            <StackPanel Margin="0,20,0,20" Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3">
+            <TextBlock x:Name="txtTraffic" HorizontalAlignment="Left" MaxWidth ="250" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,0,0,0"/>
+                <!--here will be an arrow showing the trend of file (traffic jam)-->
+                <Image Name="FileTrend" Width="50" Height="30" Margin="20,0,0,0"  HorizontalAlignment="Right" VerticalAlignment="Center"  />
+            </StackPanel>
+            
+           
+            <!--here starts OV-->
+            <TextBlock x:Name="Treinverkeer" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Treinverkeer in Antwerpen" VerticalAlignment="Top" Width="100" Grid.Row="2" Grid.Column="0"/>
+            <Image Name="Smiley" Width="50" Height="50" Margin="0,0,0,50"  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
+            <TextBlock x:Name="txtBlockLiveboardResult" HorizontalAlignment="Right"   TextWrapping="Wrap" VerticalAlignment="Top"  Text="&quot;&quot;" Grid.Row="2" Grid.Column="2"/>
+           
+            
+            <!--here starts Weather-->
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="3">
+            <TextBlock Name="ResultTextBlock" HorizontalAlignment="Left" Text="" VerticalAlignment="Center"/>
+            <Image Name="ResultImage" Width="75" Height="75" Margin="20,0,0,0" RenderTransformOrigin="0.468,2.423" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </StackPanel>
+            <!--here starts Fiets-->
+            <TextBlock Text="Met de fiets" FontSize="20" Grid.Row="4" Grid.ColumnSpan="3" Margin="0,20,0,0" />
+            <TextBlock Margin="0,0,0,10" x:Name="text" HorizontalAlignment="Left" TextWrapping="Wrap" Width="150"  Text="kilometer tot bestemming:" VerticalAlignment="Top" Grid.Row="5" Grid.Column="0"/>
+            <TextBox Margin="0,0,0,10" x:Name="dist" HorizontalAlignment="Left"  Text="" VerticalAlignment="Top" Grid.Row="5" Grid.Column="1"/>
+            <TextBlock  Margin="10,0,0,10" x:Name="km" HorizontalAlignment="Left"  Text="km" VerticalAlignment="Top" Grid.Row="5" Grid.Column="2"/>
 
-        <TextBlock x:Name="txtBlockLiveboardResult" HorizontalAlignment="Left" Height="23" Margin="176,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Text="&quot;&quot;"/>
-        <TextBlock x:Name="Treinverkeer" HorizontalAlignment="Left" Height="34" Margin="36,154,0,0" TextWrapping="Wrap" Text="Treinverkeer in Antwerpen" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="vertraging" Content="Button" HorizontalAlignment="Left" Margin="60,255,0,0" VerticalAlignment="Top" Width="75" Click="Liveboard_Click"/>
-        <TextBlock Name="ResultTextBlock" HorizontalAlignment="Left" Height="82" Margin="148,0,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="186"/>
-        <Image Name="ResultImage" Width="100" Height="100" Margin="32,0,0,0" RenderTransformOrigin="0.468,2.423" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <Button Content="Get Weather" Click="Button_Click" HorizontalAlignment="Left" Margin="36,385,0,0" VerticalAlignment="Top" Width="113" />
-        <TextBox x:Name="dist" HorizontalAlignment="Left" Margin="36,465,0,0" Text="" VerticalAlignment="Top"/>
-        <Slider x:Name="veloc" HorizontalAlignment="Left" Margin="36,516,0,0" VerticalAlignment="Top" Width="192" Maximum="20" Minimum="4" Value="14"/>
-        <TextBox HorizontalAlignment="Left" Margin="249,522,0,0" Text="{Binding ElementName=veloc,Path=Value}" VerticalAlignment="Top"/>
-        <Button x:Name="update" Content="Update" HorizontalAlignment="Left" Margin="36,584,0,0" VerticalAlignment="Top" Click="update_Click"/>
-        <TextBlock x:Name="res" HorizontalAlignment="Left" Margin="132,584,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="33"/>
-        <Button x:Name="traffic" Click="Traffic_Click" HorizontalAlignment="Left" Margin="36,485,0,0" VerticalAlignment="Top" Width="113"/>
-        <TextBlock x:Name="txtTraffic" HorizontalAlignment="Left" Margin="162,434,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Height="99"/>
+            <TextBlock Margin="0,10,0,0" x:Name="txt" HorizontalAlignment="Left" TextWrapping="Wrap" Width="100"  Text="ik rijd met mijn fiets:" VerticalAlignment="Top" Grid.Row="6" Grid.Column="0"/>
+            <TextBox Margin="0,10,0,0" HorizontalAlignment="Left"  Text="{Binding ElementName=veloc,Path=Value}" VerticalAlignment="Top" Grid.Row="6" Grid.Column="1"/>
+            <TextBlock Margin="10,10,0,10" x:Name="speed" HorizontalAlignment="Left" Width="50" Text="km/uur" VerticalAlignment="Top" Grid.Row="6" Grid.Column="2"/>
+            
+            <StackPanel Margin="0,0,0,0" Orientation="Horizontal" Grid.Row="7" Grid.ColumnSpan="3">
+            <Slider x:Name="veloc" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="192" Maximum="20" Minimum="4" Value="14"/>
+            <TextBlock x:Name="slid" HorizontalAlignment="Left"  Text="instellen km" VerticalAlignment="Bottom" />
+            </StackPanel>
+            <StackPanel Margin="0,20,0,0" Orientation="Horizontal" Grid.Row="8" Grid.ColumnSpan="3">
+            <Button  x:Name="update" Content="Update" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Click="update_Click" Grid.Row="8" Grid.Column="0"/>
+            <TextBlock Margin="20,20,0,0" x:Name="res" HorizontalAlignment="Center"  Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="220"  Grid.Row="8" Grid.ColumnSpan="2"/>
+</StackPanel>
 
-    </Grid>
+        </Grid>
+    </StackPanel>
 </Page>
+
+

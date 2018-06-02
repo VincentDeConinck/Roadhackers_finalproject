@@ -11,14 +11,14 @@
     <AssemblyName>Roadhackers_finalproject</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <PackageCertificateKeyFile>Roadhackers_finalproject_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>63BA5A0178C88B1A5DF2B0D18DF118D9059EA182</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>8660A5DC4E47A2AD7BC31C9785EDE991DAFF8371</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -112,6 +112,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Arrow\arrow_down.png" />
+    <Content Include="Assets\Arrow\arrow_right.png" />
+    <Content Include="Assets\Arrow\arrow_up.png" />
+    <Content Include="Assets\Smiley\0.png" />
+    <Content Include="Assets\Smiley\1.png" />
     <Content Include="Assets\Weather\01d.png" />
     <Content Include="Assets\Weather\01n.png" />
     <Content Include="Assets\Weather\02d.png" />
@@ -157,7 +162,7 @@
       <Version>2.2.29</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.1.4</Version>
+      <Version>6.1.5</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>11.0.2</Version>
@@ -166,6 +171,7 @@
       <Version>4.3.3</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
