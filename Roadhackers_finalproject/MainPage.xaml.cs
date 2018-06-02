@@ -107,8 +107,8 @@ namespace Roadhackers_finalproject
 
         public async Task UpdateTrafficInfo(string data, int trend) //Andres' code 
         {
-            //SANDRA: old code from Andres which caused troubles when trying to add my arrow codemj:
-            //await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => txtTraffic.Text = data);
+            //SANDRA: old code from Andres (it worked perfectly) but caused troubles when trying to add my arrow codes: 
+            // Andres code: await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => txtTraffic.Text = data);
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
             () => 
             {
@@ -156,11 +156,11 @@ namespace Roadhackers_finalproject
             var rssSubNode = rssNodes.First().SelectSingleNode("title");
             var title = rssSubNode != null ? rssSubNode.InnerText : "";
 
-            int trend = GetTrafficTrend(title);  // Sandra: Add trend number derrived out of parsed text in order to be displayed with the text box in Update traffic method 
+            int trend = GetTrafficTrend(title);  // Sandra: Add trend number coming out of parsed text in order to be displayed next the text box in Update traffic method 
 
 
-            // Return the string that contain the RSS items
-            await UpdateTrafficInfo(title, trend); // Sandra: adding trend to it 
+            // Andres :Return the string that contain the RSS items
+            await UpdateTrafficInfo(title, trend);
             
 
 
